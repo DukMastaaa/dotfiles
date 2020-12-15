@@ -23,6 +23,7 @@ Plug 'honza/vim-snippets'
 " Plug 'lervag/vimtex'
 call plug#end()
 
+" UPDATE TO LINUX PYTHON3 PATH
 let g:python3_host_prog = 'C:\\Users\\JB\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe'
 
 " deoplete
@@ -35,8 +36,8 @@ let g:python3_host_prog = 'C:\\Users\\JB\\AppData\\Local\\Programs\\Python\\Pyth
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetsDir="D:\\Programs\\Neovim\\share\\nvim\\UltiSnips"
-let g:UltiSnipsSnippetDirectories=["D:\\Programs\\Neovim\\share\\nvim\\UltiSnips"]
+let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
+let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips"]
 
 " colorscheme
 " colorscheme vitaminonec 
@@ -61,13 +62,13 @@ set list
 :set number relativenumber
 
 " automatically compile latex file thingy
-function ChangeDirAndCompile()
-    cd C:\\Users\\JB\\OneDrive\\Uni\\MATH1071\\CourseNotes
-    silent! execute "!pdflatex main.tex -output-directory output"
-endfunction
-
-autocmd BufWritePost *.tex call ChangeDirAndCompile()
-command ChangeDirAndCompile call ChangeDirAndCompile()
+"function ChangeDirAndCompile()
+"    cd C:\\Users\\JB\\OneDrive\\Uni\\MATH1071\\CourseNotes
+"    silent! execute "!pdflatex main.tex -output-directory output"
+"endfunction
+"
+"autocmd BufWritePost *.tex call ChangeDirAndCompile()
+"command ChangeDirAndCompile call ChangeDirAndCompile()
 
 " default tex type
 let g:tex_flavor = "latex"
