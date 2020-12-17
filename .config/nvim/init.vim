@@ -4,7 +4,7 @@ set showcmd
 syntax on
 filetype plugin indent on
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " NERDTree
@@ -23,8 +23,7 @@ Plug 'honza/vim-snippets'
 " Plug 'lervag/vimtex'
 call plug#end()
 
-" UPDATE TO LINUX PYTHON3 PATH
-let g:python3_host_prog = 'C:\\Users\\JB\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe'
+let g:python3_host_prog = '/usr/bin/python3'
 
 " deoplete
 " let g:deoplete#enable_at_startup = 1  " start autocomplete 
@@ -72,3 +71,4 @@ set list
 
 " default tex type
 let g:tex_flavor = "latex"
+
