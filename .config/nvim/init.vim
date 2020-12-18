@@ -44,8 +44,9 @@ let g:airline_theme='iceberg'
 colorscheme iceberg
 
 " leader key
-":nnoremap <SPACE> <Nop>
-"let mapleader = " "
+:nnoremap <SPACE> <Nop>
+let mapleader = "\<space>"
+let maplocalleader = "\<space>"
 
 " tab = 4 spaces
 set tabstop=4
@@ -92,3 +93,6 @@ let g:vimtex_compiler_latexmk = {
         \ '-pdf'
     \ ],
 \}
+
+let g:vimtex_complete_enabled = 0
+let g:vimtex_syntax_enabled = 0

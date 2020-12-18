@@ -53,6 +53,7 @@ def posCompare(cur1, cur2):
             return 0
 
 def math(localsnip):
+	#raise ValueError(f"gilles {gillescheck()} align {aligncheck(localsnip)}")
     return gillescheck() or aligncheck(localsnip)
 
 endglobal
@@ -106,7 +107,10 @@ endsnippet
 
 snippet \textbf "\\textbf{}"
 \\textbf{$1}$0
-endsnippet snippet \ "inline math" w \\($1\\)$0
+endsnippet 
+
+snippet \ "inline math" w
+\\($1\\)$0
 endsnippet
 
 snippet \[ "display math" w
@@ -377,4 +381,4 @@ context "math(snip)"
 snippet "(?<!\\)(infty)" "\\infty" rwA
 \\infty
 endsnippet
-
+	
