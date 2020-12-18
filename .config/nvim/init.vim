@@ -20,7 +20,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " YouCompleteMe
 " vimtex
-" Plug 'lervag/vimtex'
+Plug 'lervag/vimtex'
 call plug#end()
 
 let g:python3_host_prog = '/usr/bin/python3'
@@ -42,6 +42,10 @@ let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips"]
 " colorscheme vitaminonec 
 let g:airline_theme='iceberg'
 colorscheme iceberg
+
+" leader key
+":nnoremap <SPACE> <Nop>
+"let mapleader = " "
 
 " tab = 4 spaces
 set tabstop=4
@@ -72,3 +76,19 @@ set list
 " default tex type
 let g:tex_flavor = "latex"
 
+" vimtex compiler
+let g:vimtex_compiler_method = "latexmk"
+let g:vimtex_compiler_latexmk = {
+    \ 'build_dir' : '',
+    \ 'callback' : 1,
+    \ 'continuous' : 1,
+    \ 'executable' : 'latexmk',
+    \ 'hooks' : [],
+    \ 'options' : [
+        \ '-verbose',
+        \ '-file-line-error',
+        \ '-synctex=1',
+        \ '-interaction=nonstopmode',
+        \ '-pdf'
+    \ ],
+\}
