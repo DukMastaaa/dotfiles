@@ -21,6 +21,8 @@ Plug 'honza/vim-snippets'
 " YouCompleteMe
 " vimtex
 Plug 'lervag/vimtex'
+" fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 call plug#end()
 
 let g:python3_host_prog = '/usr/bin/python3'
@@ -65,16 +67,7 @@ set list
 " Hybrid line numbers
 :set number relativenumber
 
-" automatically compile latex file thingy
-"function ChangeDirAndCompile()
-"    cd C:\\Users\\JB\\OneDrive\\Uni\\MATH1071\\CourseNotes
-"    silent! execute "!pdflatex main.tex -output-directory output"
-"endfunction
-"
-"autocmd BufWritePost *.tex call ChangeDirAndCompile()
-"command ChangeDirAndCompile call ChangeDirAndCompile()
-
-" default tex type
+" default tex type for UltiSnips
 let g:tex_flavor = "latex"
 
 " vimtex compiler
