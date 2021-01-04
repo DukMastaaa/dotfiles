@@ -22,6 +22,7 @@ Plug 'lervag/vimtex'
 
 " fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Currently Unused
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
