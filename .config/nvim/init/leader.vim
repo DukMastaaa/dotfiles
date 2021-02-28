@@ -9,7 +9,8 @@ let maplocalleader = "\<space>"
 
 " Mappings for fzf
 map <Leader>ff :Files<Return>
-map <leader>fn :FZF<SPACE>
+map <Leader>fn :FZF<SPACE>
+map <Leader>fc :execute printf("Files %s", g:config_dir)<Return>
 
 " Mappings for buffers
 map <Leader>j :bprev<Return>

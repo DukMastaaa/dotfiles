@@ -7,7 +7,13 @@ set showcmd
 syntax on
 filetype plugin indent on
 
-let g:python3_host_prog = '/usr/bin/python3'   " Provide python path
+
+" Provide python path
+if has('win32')
+    let g:python3_host_prog = 'C:\\Users\\JB\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe'
+else
+    let g:python3_host_prog = '/usr/bin/python3'
+endif
 
 
 " colorscheme

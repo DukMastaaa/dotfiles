@@ -1,7 +1,14 @@
 " Main $MYVIMRC file
 
+if has('win32')
+    let g:config_dir = "D:\\GitHub\\dotfiles\\.config\\nvim\\"
+    let initString = "init\\"
+else
+    let g:config_dir = "~/.config/nvim/"
+    let initString = "init/"
+endif
 
-source ~/.config/nvim/init/plug.vim             " Loads Vim-Plug plugins
-source ~/.config/nvim/init/general.vim          " General Neovim settings
-source ~/.config/nvim/init/leader.vim           " Leader (and other) key mappings
-source ~/.config/nvim/init/pluginsettings.vim   " Plugin-specific settings
+
+for filename in ["plug.vim", "general.vim", "leader.vim", "pluginsettings.vim"]
+    exec printf('source %s%s%s', g:config_dir, initString, filename)
+endfor

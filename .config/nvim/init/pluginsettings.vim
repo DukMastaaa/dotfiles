@@ -2,12 +2,13 @@
 
 
 " UltiSnips 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
-let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips"]
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-tab>"
 let g:tex_flavor = "latex"  " default tex type for UltiSnips
+
+let g:UltiSnipsSnippetsDir = g:config_dir . "UltiSnips"
+let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir]
 
 
 " VimTex
