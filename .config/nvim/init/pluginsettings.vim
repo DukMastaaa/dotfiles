@@ -30,7 +30,6 @@ let g:vimtex_compiler_latexmk = {
 \}
 
 let g:vimtex_complete_enabled = 0
-let g:vimtex_syntax_enabled = 0
 
 
 " Airline

@@ -12,6 +12,10 @@ map <Leader>ff :Files<Return>
 map <Leader>fn :FZF<SPACE>
 map <Leader>fc :execute printf("Files %s", g:config_dir)<Return>
 
+" Mappings for yank/paste
+map <Leader>p "+p<Return>
+map <Leader>y "+y
+
 " Mappings for buffers
 map <Leader>j :bprev<Return>
 map <Leader>k :bnext<Return>
