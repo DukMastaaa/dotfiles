@@ -30,3 +30,6 @@ set list
 
 " Hybrid line numbers
 :set number relativenumber
+
+" Show context lines above and below cursor
+:set scrolloff=5

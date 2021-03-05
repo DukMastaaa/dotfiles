@@ -1,17 +1,48 @@
-# Python global stuff 
+# Python global stuff
 global !p
 
 def math():
     return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
-def comment(): 
+def comment():
     return vim.eval('vimtex#syntax#in_comment()') == '1'
 
 def env(name):
-    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
     return x != '0' and x != '0'
 
 endglobal
+
+# Document text
+snippet homeworktemplate "homework document template"
+\\documentclass[11pt]{homework}
+
+\\input{mymathpreamble.tex}
+
+\\newcommand{\\hwname}{$1}
+\\newcommand{\\hwemail}{${2:46444107}}
+\\newcommand{\\hwtype}{${3:Assignment}}
+\\newcommand{\\hwnum}{$4}
+\\newcommand{\\hwclass}{${5:CourseCode}}
+\\newcommand{\\hwlecture}{}  % blank
+\\newcommand{\\hwsection}{}  % blank
+
+\\begin{document}
+\\maketitle
+$0
+\\end{document}
+endsnippet
+
+snippet normalquestion "normal question"
+\\question $0
+endsnippet
+
+snippet alphaquestion "alpha part question"
+\\question
+\\begin{alphaparts}
+\\questionpart $0
+\\end{alphaparts}
+endsnippet
 
 # LaTeX tags
 snippet \begin "begin"
@@ -177,6 +208,16 @@ snippet d// "derivative fraction" A
 endsnippet
 
 context "math()"
+snippet \dfr "derivative fraction" i
+\\derivfrac{$1}{$2}$0
+endsnippet
+
+context "math"
+snippet \pfr "partial derivative fraction" i
+\\pfrac{$1}{$2}$0
+endsnippet
+
+context "math()"
 snippet abs "absolute value" wA
 \\abs{$1}$0
 endsnippet
@@ -295,11 +336,19 @@ endsnippet
 
 context "math()"
 snippet lrb "left and right braces" wA
-\\left{$1\\right}$0
+\\left\\{$1\\right\\}$0
 endsnippet
 
 snippet { "manual braces" w
 \\{$1\\}$0
+endsnippet
+
+# Matrices
+context "math()"
+snippet \pmat "pmatrix" w
+\\begin{pmatrix}
+	$0
+\\end{pmatrix}
 endsnippet
 
 # Symbols 
@@ -317,7 +366,7 @@ snippet vareps "\\varepsilon" wA
 endsnippet
 
 context "math()"
-snippet lam "\\lambda" wA
+snippet lam "\\lambda" wAi
 \\lambda
 endsnippet
 
@@ -336,4 +385,3 @@ context "math()"
 snippet "(?<!\\)(infty)" "\\infty" rwA
 \\infty
 endsnippet
-	

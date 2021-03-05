@@ -25,3 +25,6 @@ map <C-w><C-Left> <C-w><lt>
 map <C-w><C-Right> <C-w>>
 map <C-w><C-Up> <C-w>-
 map <C-w><C-Down> <C-w>+
+
+" control backspace to delete words in insert mode
+:imap <C-BS> <Esc>dBxi

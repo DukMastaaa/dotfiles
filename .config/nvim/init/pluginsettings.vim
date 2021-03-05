@@ -15,7 +15,7 @@ let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir]
 " Compiler
 let g:vimtex_compiler_method = "latexmk"
 let g:vimtex_compiler_latexmk = {
-    \ 'build_dir' : '',
+    \ 'build_dir' : './output/',
     \ 'callback' : 1,
     \ 'continuous' : 1,
     \ 'executable' : 'latexmk',
