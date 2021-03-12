@@ -24,6 +24,9 @@ Plug 'lervag/vimtex'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" startify
+Plug 'mhinz/vim-startify'
+
 " Currently Unused
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }

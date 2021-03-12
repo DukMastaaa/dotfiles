@@ -9,31 +9,40 @@
 \usepackage{siunitx}
 \usepackage{accents}
 
+% Operators
+\newcommand{\deriv}{~\mathrm{d}}
+\DeclareMathOperator{\usum}{U}
+\DeclareMathOperator{\lsum}{L}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\proj}{Proj}
 
+% Environments
 \theoremstyle{definition}
 \newtheorem{proposition}{Proposition}
 
+% Left and right brackets
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\inner}[2]{\left\langle #1 ,\, #2 \right\rangle}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\angleb}[1]{\left\langle #1 \right\rangle}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
 
-\newcommand{\deriv}{~\mathrm{d}}
-\newcommand{\derivfrac}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+% Other symbols
+\newcommand{\utilde}[1]{\underaccent{\sim}{#1}}
+\newcommand{\uvec}[1]{\utilde{#1}}
+\newcommand{\grad}{\mathbf{\nabla}}
+\newcommand{\degree}{^{\circ}}
+
+% Calculus stuff
+\newcommand{\derivfrac}[2]{\frac{\deriv #1}{\deriv #2}}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 
 \newcommand{\uint}[2]{\displaystyle{\int^{\overline{#2}}_{#1}}}
 \newcommand{\lint}[2]{\displaystyle{\int^{#2}_{\underline{#1}}}}	
 \newcommand{\nint}[2]{\displaystyle{\int^{#2}_{#1}}}
 
-\newcommand{\usum}{\mathrm{U}}
-\newcommand{\lsum}{\mathrm{L}}
-
 \newcommand{\infsum}[1]{\sum \limits^{\infty}_{#1}}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\spn}{\mathrm{span}~}
 
-\newcommand{\degree}{^{\circ}}
-\newcommand{\angleb}[1]{\left\langle #1 \right\rangle}
-
-\newcommand{\utilde}[1]{\underaccent{\sim}{#1}}
-\newcommand{\grad}{\mathbf{\nabla}}
-
+% Stuff for other packages
 \sisetup{quotient-mode=fraction} % Output a/b as \frac{a}{b}

@@ -6,11 +6,11 @@ nnoremap <SPACE> <Nop>
 let mapleader = "\<space>"
 let maplocalleader = "\<space>"
 
-
 " Mappings for fzf
-map <Leader>ff :Files<Return>
+map <Leader>ff :FZF<Return>
 map <Leader>fn :FZF<SPACE>
 map <Leader>fc :execute printf("Files %s", g:config_dir)<Return>
+" map <Leader>fc call fzf#vim#files(g:config_dir)<Return> 
 
 " Mappings for yank/paste
 map <Leader>p "+p<Return>
@@ -26,5 +26,14 @@ map <C-w><C-Right> <C-w>>
 map <C-w><C-Up> <C-w>-
 map <C-w><C-Down> <C-w>+
 
+" change directory
+
+map <Leader>cp :cd %:p:h<Return>
+map <Leader>cd :cd D:\<Return>
+map <Leader>cc :cd C:\<Return>
+map <Leader>co :execute printf("cd %s", $HOME . "\\OneDrive")<Return>
+ 
+
 " control backspace to delete words in insert mode
 :imap <C-BS> <Esc>dBxi
+

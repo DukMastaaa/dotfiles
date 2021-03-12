@@ -212,14 +212,24 @@ snippet \dfr "derivative fraction" i
 \\derivfrac{$1}{$2}$0
 endsnippet
 
-context "math"
+context "math()"
 snippet \pfr "partial derivative fraction" i
 \\pfrac{$1}{$2}$0
 endsnippet
 
 context "math()"
+snippet \inner "inner product" i
+\\inner{$1}{$2}$0
+endsnippet
+
+context "math()"
 snippet abs "absolute value" wA
 \\abs{$1}$0
+endsnippet
+
+context "math()"
+snippet \norm "norm of vector" i
+\\norm{$1}$0
 endsnippet
 
 context "math()"
@@ -243,8 +253,13 @@ snippet pow "exponent" iA
 endsnippet
 
 context "math()"
-snippet sub "subscript" iA
+snippet "(?<!\\|n)(sub)" "subscript" riA
 _{$1}$0
+endsnippet
+
+context "math()"
+snippet \proj "orthogonal projection" i
+\\proj_{$1}($2)$0
 endsnippet
 
 # from gilles
@@ -269,7 +284,7 @@ snippet gt ">" wA
 endsnippet
 
 context "math()"
-snippet inn "\\in" wA
+snippet "(?<!\\)(inn)" "\\in" rwA
 \\in
 endsnippet
 
@@ -321,6 +336,16 @@ endsnippet
 context "math()"
 snippet vec "vector" wA
 \\vec{$1}$0
+endsnippet
+
+context "math()"
+snippet uvec "under tilde vector" wA
+\\uvec{$1}$0
+endsnippet
+
+context "math()"
+snippet \hat "unit vector" w
+\\hat{$1}$0
 endsnippet
 
 # Brackets, Braces, Parentheses

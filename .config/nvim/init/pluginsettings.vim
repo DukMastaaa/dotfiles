@@ -30,7 +30,13 @@ let g:vimtex_compiler_latexmk = {
 \}
 
 let g:vimtex_complete_enabled = 0
-
+let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_general_viewer = 'mupdf'
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
+
+
+" FZF
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline']}, <bang>0)
