@@ -66,3 +66,8 @@
 
 % Stuff for other packages
 \sisetup{quotient-mode=fraction} % Output a/b as \frac{a}{b}
+\sisetup{output-complex-root=\ensuremath{\mathrm{j}}}  % change sqrt(-1) to display as j instead of i
+
+% Custom units
+\DeclareSIUnit \voltampere {VA}  % apparent power
+\DeclareSIUnit \vareactive {VAR}  % reactive power

@@ -1,4 +1,7 @@
-# Python global stuff
+# -----------------------------
+# GLOBAL PYTHON
+# -----------------------------
+
 global !p
 
 # Using https://castel.dev/post/lecture-notes-1/#context
@@ -14,7 +17,7 @@ def env(name):
     return x != '0' and x != '0'
 
 def create_matrix(snip):
-		# adapted from https://github.com/honza/vim-snippets/blob/master/UltiSnips/tex.snippets
+        # adapted from https://github.com/honza/vim-snippets/blob/master/UltiSnips/tex.snippets
 
         matrix_str = (snip.buffer[snip.line].split('mat')[0]+'matrix').strip()
 
@@ -44,7 +47,11 @@ def create_matrix(snip):
         snip.expand_anon(final_str)
 endglobal
 
-# Document text
+
+# -----------------------------
+# DOCUMENT TEXT AND NON-MATH COMMANDS
+# -----------------------------
+
 snippet homeworktemplate "homework document template"
 \\documentclass[11pt]{homework}
 
@@ -75,7 +82,6 @@ snippet alphaquestion "alpha part question"
 \\end{alphaparts}
 endsnippet
 
-# LaTeX tags
 snippet \begin "begin"
 \\begin{$1}
     $0
@@ -120,7 +126,7 @@ endsnippet
 
 snippet \definition "\\begin{definition}"
 \\begin{definition}[$1]
-	$0
+    $0
 \\end{definition}
 endsnippet
 
@@ -132,6 +138,23 @@ snippet \textbf "\\textbf{}"
 \\textbf{$1}$0
 endsnippet 
 
+snippet \si "numerical unit"
+\\SI{$1}{$2}$0
+endsnippet
+
+# this is because \SI can't deal with formulas inside
+context "math()"
+snippet \su "formula unit"
+\,\si{$1}$0
+endsnippet
+
+snippet figure "figure"
+\\begin{center}
+    \\includegraphics[scale=${1:0.5}]{$2}
+\\end{center}
+$0
+endsnippet
+
 snippet \ "inline math" w
 \\($1\\)$0
 endsnippet
@@ -140,59 +163,157 @@ snippet \[ "display math" w
 \\[$1\\]$0
 endsnippet
 
-# Quantifiers and Logic
+
+# -----------------------------
+# STANDALONE SYMBOLS
+# -----------------------------
+
+# === GREEK LETTERS ===
+
 context "math()"
-snippet fa "\forall" wA
+snippet "(?<!\\)(alpha|beta|gamma|delta|sigma|theta|mu|pi|rho|sigma|tau|varphi|omega)" "greek letters verbatim" rA
+`!p snip.rv = "\\" + match.group(1)`
+endsnippet
+
+context "math()"
+snippet "(?<!\\)(Delta|Omega)" "uppercase greek verbatim" rA
+`!p snip.rv = "\\" + match.group(1)`
+endsnippet
+
+snippet meow "meow" w
+moo
+endsnippet
+
+context "math()"
+snippet "(?<!\\)vareps" "\\varepsilon" rwA
+\\varepsilon
+endsnippet
+
+context "math()"
+snippet "(?<!\\|\w)lam" "\\lambda" riA
+\\lambda
+endsnippet
+
+# === LOGIC ===
+
+context "math()"
+snippet "(?<!\\|\w)fa" "\forall" rwA
 \\forall
 endsnippet
 
 context "math()"
-snippet ee "\exists" wA
+snippet "(?<!\\|\w)ee" "\exists" rwA
 \\exists
 endsnippet
 
 context "math()"
-snippet nee "\nexists" wA
+snippet "(?<!\\|\w)nee" "\nexists" rwA
 \\nexists
 endsnippet
 
 context "math()"
-snippet imp "\implies" wA
+snippet "(?<!\\|\w)imp" "\implies" rwA
 \\implies
 endsnippet
 
 context "math()"
-snippet rimp "\impliedby" wA
+snippet "(?<!\\|\w)rimp" "\impliedby" rwA
 \\impliedby
 endsnippet
 
-# Sequences and Limits
+# === SET THEORY ===
+
 context "math()"
-snippet seq "sequence" wA
+snippet "(?<!\\|\w)(leq|geq|neq)" "leq, geq, neq" rwA
+`!p snip.rv = "\\" + match.group(1)`
+endsnippet
+
+context "math()"
+snippet "(?<!\\|\w)lt" "<" rA
+<
+endsnippet
+
+context "math()"
+snippet "(?<!\\|\w)gt" ">" rA
+>
+endsnippet
+
+context "math()"
+snippet "(?<!\\|\w)inn" "\\in" rwA
+\\in
+endsnippet
+
+context "math()"
+snippet "(?<!\\)(notin|cap|cup)" "notin, cap, cup" rwA
+`!p snip.rv = "\\" + match.group(1)`
+endsnippet
+
+context "math()"
+snippet "(?<!\\)sbt" "\\subset" rwA
+\\subset
+endsnippet
+
+context "math()"
+snippet "(?<!\\)rsbt" "\\supset" rwA
+\\supset
+endsnippet
+
+context "math()"
+snippet "(?<!\\)esbt" "\\subseteq" rwA
+\\subseteq
+endsnippet
+
+context "math()"
+snippet "(?<!\\)ersbt" "\\supseteq" rwA
+\\supseteq
+endsnippet
+
+context "math()"
+snippet "bb(.)" "\\mathbb{R}" rwA
+`!p snip.rv = "\\mathbb{" + match.group(1).upper() + "}"`
+endsnippet
+
+# == MISCELLANEOUS ==
+
+context "math()"
+snippet "(?<!\\)infty" "\\infty" rwA
+\\infty
+endsnippet
+
+
+# -----------------------------
+# NOTATION
+# -----------------------------
+
+# === SEQUENCES, LIMITS ===
+
+context "math()"
+snippet "(?<!\\|\w)seq" "sequence" rwA
 ($1_{${2:n}})^{\infty}_{$2=1}$0
 endsnippet
 
 context "math()"
-snippet sbq "subsequence" wA
+snippet "(?<!\\)sbq" "subsequence" rwA
 ($1_{${2:n}_{${3:k}}})^{\infty}_{$3=1}$0
 endsnippet
 
 context "math()"
-snippet limm "limit" wA
+snippet "(?<!\\)limm" "limit" rwA
 \lim_{$1 \to $2}$0
 endsnippet
 
 context "math()"
-snippet limsup "limsup" wA
+snippet "(?<!\\)limsup" "limsup" rwA
 \limsup_{$1 \to $2}$0
 endsnippet
 
 context "math()"
-snippet liminf "liminf" wA
+snippet "(?<!\\)liminf" "liminf" rwA
 \liminf_{$1 \to $2}$0
 endsnippet
 
-# Derivatives, Integrals, Sums, Products 
+# === CALCULUS ===
+
 context "math()"
 snippet nint "definite integral" A
 \\int_{$1}^{$2} $0
@@ -224,15 +345,11 @@ snippet iprod "infinite product" A
 endsnippet
 
 context "math()"
-snippet der "derivative" wA
+snippet "(?<!\\|\w)der" "derivative" rwA
 \\deriv
 endsnippet
 
-# Operators, Fractions 
-context "math()"
-snippet // "fraction" A
-\\frac{$1}{$2}$0
-endsnippet
+# === FRACTIONS ===
 
 context "math()"
 snippet \fr "fraction" i
@@ -254,13 +371,15 @@ snippet \pfr "partial derivative fraction" i
 \\pfrac{$1}{$2}$0
 endsnippet
 
+# == OPERATORS ==
+
 context "math()"
 snippet \inner "inner product" i
 \\inner{$1}{$2}$0
 endsnippet
 
 context "math()"
-snippet abs "absolute value" wA
+snippet "(?<!\\)abs" "absolute value" rwA
 \\abs{$1}$0
 endsnippet
 
@@ -270,7 +389,7 @@ snippet \norm "norm of vector" i
 endsnippet
 
 context "math()"
-snippet times "\\times" wA
+snippet "(?<!\\)times" "\\times" rwA
 \\times
 endsnippet
 
@@ -290,13 +409,8 @@ snippet pow "exponent" iA
 endsnippet
 
 context "math()"
-snippet "(?<!\\|n)(sub)" "subscript" riA
+snippet "(?<!\\|n)(sub)" "manual subscript" riA
 _{$1}$0
-endsnippet
-
-context "math()"
-snippet \proj "orthogonal projection" i
-\\proj_{$1}($2)$0
 endsnippet
 
 # adapted from gilles
@@ -306,77 +420,22 @@ snippet '([A-Za-z](?<!mat)(?<!mat\dx))(\d)' "auto subscript" wrA
 endsnippet
 
 context "math()"
-snippet "(?<!\\)(leq|geq|neq)" "leq, geq, neq" rwA
-`!p snip.rv = "\\" + match.group(1)`
-endsnippet
-
-context "math()"
-snippet lt "<" wA
-<
-endsnippet
-
-context "math()"
-snippet gt ">" wA
->
-endsnippet
-
-context "math()"
-snippet "(?<!\\)(inn)" "\\in" rwA
-\\in
-endsnippet
-
-context "math()"
-snippet "(?<!\\)(notin)" "\\notin" rwA
-\\notin
-endsnippet
-
-context "math()"
-snippet "(?<!\\)(cap)" "\\cap" rwA
-\\cap
-endsnippet
-
-context "math()"
-snippet "(?<!\\)(cup)" "\\cup" rwA
-\\cup
-endsnippet
-
-context "math()"
-snippet sbt "\\subset" wA
-\\subset
-endsnippet
-
-context "math()"
-snippet rsbt "\\supset" wA
-\\supset
-endsnippet
-
-context "math()"
-snippet esbt "\\subseteq" wA
-\\subseteq
-endsnippet
-
-context "math()"
-snippet ersbt "\\supseteq" wA
-\\supseteq
-endsnippet
-
-context "math()"
-snippet root "square root" wA
+snippet "(?<!\\)root" "square root" rwA
 \\sqrt{$1}$0
 endsnippet
 
 context "math()"
-snippet noot "variable root" wA
+snippet "(?<!\\)noot" "variable root" rwA
 \\sqrt[$1]{$2}$0
 endsnippet
 
 context "math()"
-snippet vec "vector" wA
+snippet "(?<!\\|u)vec" "vector" rwA
 \\vec{$1}$0
 endsnippet
 
 context "math()"
-snippet uvec "under tilde vector" wA
+snippet "(?<!\\)uvec" "under tilde vector" rwA
 \\uvec{$1}$0
 endsnippet
 
@@ -385,19 +444,28 @@ snippet \hat "unit vector" w
 \\hat{$1}$0
 endsnippet
 
-# Brackets, Braces, Parentheses
 context "math()"
-snippet lrp "left and right paren" wA
+snippet \proj "orthogonal projection" i
+\\proj_{$1}($2)$0
+endsnippet
+
+
+# -----------------------------
+# BRACKETS
+# -----------------------------
+
+context "math()"
+snippet "(?<!\\)lrp" "left and right paren" rwA
 \\left($1\\right)$0
 endsnippet
 
 context "math()"
-snippet lr[ "left and right squ bracket" wA
+snippet "(?<!\\)lr\[" "left and right squ bracket" rwA
 \\left[$1\\right]$0
 endsnippet
 
 context "math()"
-snippet lrb "left and right braces" wA
+snippet "(?<!\\)lrb" "left and right braces" rwA
 \\left\\{$1\\right\\}$0
 endsnippet
 
@@ -405,49 +473,18 @@ snippet { "manual braces" w
 \\{$1\\}$0
 endsnippet
 
-# Matrices
+
+# -----------------------------
+# MATRICES
+# -----------------------------
+
 context "math()"
 snippet \pmat "pmatrix" w
 \\begin{pmatrix}
-	$0
+    $0
 \\end{pmatrix}
 endsnippet
 
 pre_expand "create_matrix(snip)"
 snippet "(small|[bBpvV])?mat(rix)?(\d+)x(\d+)" "Generate (small|[bBpvV])?matrix of *rows* by *columns*" br
-endsnippet
-
-# Symbols 
-# Greek letters
-# Lowercase
-context "math()"
-snippet "(?<!\\)(alpha|beta|gamma|delta|sigma|theta|mu|pi|rho|sigma|tau|varphi|omega)" "lowercase-greek-verbatim" rwA
-`!p snip.rv = "\\" + match.group(1)`
-endsnippet
-
-# (lowercase-greek-abbreviated)
-context "math()"
-snippet vareps "\\varepsilon" wA
-\\varepsilon
-endsnippet
-
-context "math()"
-snippet lam "\\lambda" wAi
-\\lambda
-endsnippet
-
-# Uppercase
-context "math()"
-snippet "(?<!\\)(Delta|Omega)" "uppercase-greek-verbatim" rwA
-`!p snip.rv = "\\" + match.group(1)`
-endsnippet
-
-context "math()"
-snippet "bb(.)" "\\mathbb{R}" rwA
-`!p snip.rv = "\\mathbb{" + match.group(1).upper() + "}"`
-endsnippet
-
-context "math()"
-snippet "(?<!\\)(infty)" "\\infty" rwA
-\\infty
 endsnippet
