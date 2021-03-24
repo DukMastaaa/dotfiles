@@ -6,45 +6,62 @@ global !p
 
 # Using https://castel.dev/post/lecture-notes-1/#context
 
-def math():
+def math() -> bool:
     return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
-def comment():
+
+def comment() -> bool:
     return vim.eval('vimtex#syntax#in_comment()') == '1'
 
-def env(name):
+
+def env(name: str) -> bool:
     [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
     return x != '0' and x != '0'
 
-def create_matrix(snip):
-        # adapted from https://github.com/honza/vim-snippets/blob/master/UltiSnips/tex.snippets
 
-        matrix_str = (snip.buffer[snip.line].split('mat')[0]+'matrix').strip()
+def matrix_tabstop_helper(rows: int, cols: int, line_spacing: int, tabstop_offset: int) -> str:
+    output = ""
+    for i in range(rows):
+        output += line_spacing + ' ' * 4    # replace tab with 4 spaces 
+        output += " & ".join(['$' + str(i * cols + j + tabstop_offset) for j in range(cols)])
+        output += r" \\\ " + "\n"
+    return output
 
-        rows = 'x'.join(snip.buffer[snip.line].split("x", 2)[:-1])
-        cols = 'x'.join(snip.buffer[snip.line].split("x", 2)[-1:])
 
-        int_val = lambda string: int(''.join(s for s in string if s.isdigit()))
+NORMAL_MATRIX_PATTERN = re.compile(r"([bBpvV])mat(\d+)x(\d+)")
 
-        rows = int_val(rows)
-        cols = int_val(cols)
 
-        offset = cols + 1
-        old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+def create_normal_matrix(snip) -> str:
+    # adapted from https://github.com/honza/vim-snippets/blob/master/UltiSnips/tex.snippets
+    line = snip.buffer[snip.line]
 
-        snip.buffer[snip.line] = ''
+    match = NORMAL_MATRIX_PATTERN.search(line)
 
-        final_str = old_spacing + "\\begin{"+matrix_str+"}\n"
 
-        for i in range(rows):
-                final_str += old_spacing + '\t'
-                final_str += " & ".join(['$' + str(i * cols + j + offset) for j in range(cols)])
+    matrix_type, rows, cols = match.groups()
+    rows = int(rows)
+    cols = int(cols)
 
-                final_str += " \\\\\\\n"
+    matrix_str = matrix_type + "matrix"
 
-        final_str += old_spacing + "\\end{"+matrix_str+"}\n$0"
+    #matrix_str = (line.split('mat')[0]+'matrix').strip()
 
-        snip.expand_anon(final_str)
+    #rows = 'x'.join(line.split("x", 2)[:-1])
+    #cols = 'x'.join(line.split("x", 2)[-1:])
+
+    #int_val = lambda string: int(''.join(s for s in string if s.isdigit()))
+
+    #rows = int_val(rows)
+    #cols = int_val(cols)
+
+    tabstop_offset = cols + 1
+    line_spacing = line[:line.find(' ') + 1]
+
+    final_str = line_spacing + "\\begin{" + matrix_str + "}\n"
+    final_str += matrix_tabstop_helper(rows, cols, line_spacing, tabstop_offset)
+    final_str += line_spacing + "\\end{" + matrix_str + "\n$0" 
+
+    snip.expand_anon(final_str)
 endglobal
 
 
@@ -485,6 +502,7 @@ snippet \pmat "pmatrix" w
 \\end{pmatrix}
 endsnippet
 
-pre_expand "create_matrix(snip)"
-snippet "(small|[bBpvV])?mat(rix)?(\d+)x(\d+)" "Generate (small|[bBpvV])?matrix of *rows* by *columns*" br
+context "math()"
+pre_expand "create_normal_matrix(snip)"
+snippet "([bBpvV])mat(rix)?(\d+)x(\d+)" "Generate (small|[bBpvV])?matrix of *rows* by *columns*" wr
 endsnippet
