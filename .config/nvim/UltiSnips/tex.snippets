@@ -29,39 +29,56 @@ def matrix_tabstop_helper(rows: int, cols: int, line_spacing: int, tabstop_offse
 
 
 NORMAL_MATRIX_PATTERN = re.compile(r"([bBpvV])mat(\d+)x(\d+)")
+AUGMENTED_MATRIX_PATTERN = re.compile(r"amat(\d+)x(\d+).(\d+)") 
 
 
 def create_normal_matrix(snip) -> str:
     # adapted from https://github.com/honza/vim-snippets/blob/master/UltiSnips/tex.snippets
     line = snip.buffer[snip.line]
-
     match = NORMAL_MATRIX_PATTERN.search(line)
-
 
     matrix_type, rows, cols = match.groups()
     rows = int(rows)
     cols = int(cols)
-
     matrix_str = matrix_type + "matrix"
 
-    #matrix_str = (line.split('mat')[0]+'matrix').strip()
-
-    #rows = 'x'.join(line.split("x", 2)[:-1])
-    #cols = 'x'.join(line.split("x", 2)[-1:])
-
-    #int_val = lambda string: int(''.join(s for s in string if s.isdigit()))
-
-    #rows = int_val(rows)
-    #cols = int_val(cols)
-
     tabstop_offset = cols + 1
-    line_spacing = line[:line.find(' ') + 1]
+    line_spacing = line[:(len(line) - len(line.lstrip()))]
+    remaining = line[:line.rfind(matrix_type + "mat")]
 
-    final_str = line_spacing + "\\begin{" + matrix_str + "}\n"
+    snip.buffer[snip.line] = ""
+
+    final_str = remaining + "\\begin{" + matrix_str + "}\n"
     final_str += matrix_tabstop_helper(rows, cols, line_spacing, tabstop_offset)
     final_str += line_spacing + "\\end{" + matrix_str + "\n$0" 
 
     snip.expand_anon(final_str)
+
+
+def create_augmented_matrix(snip):
+    line = snip.buffer[snip.line]
+    match = AUGMENTED_MATRIX_PATTERN.search(line)
+
+    rows, cols, augcols = match.groups()
+    rows = int(rows)
+    cols = int(cols)
+    augcols = int(augcols) 
+
+    tabstop_offset = cols + 1
+
+    line_spacing = line[:(len(line) - len(line.lstrip()))]
+    remaining = line[:line.rfind("amat")]
+
+    snip.buffer[snip.line] = ""
+
+    first_line = r"\left(\begin{array}{" + "c" * cols + ("|" + "c" * augcols if augcols else "") + "}\n"
+
+    final_str = remaining + first_line
+    final_str += matrix_tabstop_helper(rows, cols + augcols, line_spacing, tabstop_offset)
+    final_str += line_spacing + r"\end{array}\right)\n"
+
+    snip.expand_anon(final_str)
+
 endglobal
 
 
@@ -505,4 +522,9 @@ endsnippet
 context "math()"
 pre_expand "create_normal_matrix(snip)"
 snippet "([bBpvV])mat(rix)?(\d+)x(\d+)" "Generate (small|[bBpvV])?matrix of *rows* by *columns*" wr
+endsnippet
+
+context "math()"
+pre_expand "create_augmented_matrix(snip)"
+snippet "amat(\d+)x(\d+).(\d+)" "Generate augmented matrix" wr
 endsnippet
