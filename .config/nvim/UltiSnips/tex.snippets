@@ -50,7 +50,7 @@ def create_normal_matrix(snip) -> str:
 
     final_str = remaining + "\\begin{" + matrix_str + "}\n"
     final_str += matrix_tabstop_helper(rows, cols, line_spacing, tabstop_offset)
-    final_str += line_spacing + "\\end{" + matrix_str + "\n$0" 
+    final_str += line_spacing + "\\end{" + matrix_str + "}\n$0" 
 
     snip.expand_anon(final_str)
 
@@ -75,7 +75,7 @@ def create_augmented_matrix(snip):
 
     final_str = remaining + first_line
     final_str += matrix_tabstop_helper(rows, cols + augcols, line_spacing, tabstop_offset)
-    final_str += line_spacing + r"\end{array}\right)\n"
+    final_str += line_spacing + r"\end{array}\right)" + "\n"
 
     snip.expand_anon(final_str)
 
@@ -354,12 +354,22 @@ snippet nint "definite integral" A
 endsnippet
 
 context "math()"
-snippet "(?<!\\|n)(int)" "indefinite integral" rA
+snippet uint "upper integral" A
+\\uint{$1}{$2} $0
+endsnippet
+
+context "math()"
+snippet lint "lower integral" A
+\\lint{$1}{$2} $0
+endsnippet
+
+context "math()"
+snippet "(?<!\\|n|u|l)(int)" "indefinite integral" rA
 \\int
 endsnippet
 
 context "math()"
-snippet sum "sum with limits" iA
+snippet summ "sum with limits" iA
 \\sum_{$1}^{$2}
 endsnippet
 
@@ -381,6 +391,16 @@ endsnippet
 context "math()"
 snippet "(?<!\\|\w)der" "derivative" rwA
 \\deriv
+endsnippet
+
+context "math()"
+snippet isup "supremum for upper sum" A
+\\sup_{x \\in [x_{${1:i-1}}, x_{${2:i}}]} ${3:f(x)} $0
+endsnippet
+
+context "math()"
+snippet iinf "infimum for lower sum" A
+\\inf_{x \\in [x_{${1:i-1}}, x_{${2:i}}]} ${3:f(x)} $0
 endsnippet
 
 # === FRACTIONS ===

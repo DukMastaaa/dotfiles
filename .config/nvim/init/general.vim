@@ -21,6 +21,12 @@ let g:airline_theme='iceberg'
 colorscheme iceberg
 
 
+" GUI customisation for Neovide 
+let g:neovide_fullscreen=v:true
+set guifont=Consolas:h22
+let g:neovide_cursor_animation_length=0 
+
+
 " tab = 4 spaces
 set tabstop=4
 set shiftwidth=4

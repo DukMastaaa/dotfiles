@@ -12,6 +12,12 @@ map <Leader>fn :FZF<SPACE>
 map <Leader>fc :execute printf("Files %s", g:config_dir)<Return>
 " map <Leader>fc call fzf#vim#files(g:config_dir)<Return> 
 
+" Mappings for Neovide-specific things
+map <Leader>vf :let g:neovide_fullscreen=v:true<Return>
+map <Leader>vF :let g:neovide_fullscreen=v:false<Return>
+" just to refresh things while graphical glitches still exist
+map <Leader>vr :set guifont=Consolas:h22<Return>
+
 " Mappings for yank/paste
 map <Leader>p "+p<Return>
 map <Leader>y "+y
