@@ -8,6 +8,7 @@
 \graphicspath{ {./images/} }
 \usepackage{siunitx}
 \usepackage{accents}
+\usepackage[nodayofweek,level]{datetime}
 
 % Operators
 \newcommand{\deriv}{~\mathrm{d}}
@@ -49,8 +50,11 @@
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
 % Other symbols
+\DeclareMathAccent{\wtilde}{\mathord}{largesymbols}{"65}
+
 \newcommand{\utilde}[1]{\underset{\sim}{#1}}
-\newcommand{\uvec}[1]{\utilde{#1}}
+%\newcommand{\uvec}[1]{\utilde{#1}}
+\newcommand{\uvec}[1]{\underaccent{\wtilde}{{#1}}}
 \newcommand{\grad}{\mathbf{\nabla}}
 \newcommand{\degree}{^{\circ}}
 	

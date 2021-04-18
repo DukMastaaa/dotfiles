@@ -349,22 +349,27 @@ endsnippet
 # === CALCULUS ===
 
 context "math()"
-snippet nint "definite integral" A
-\\int_{$1}^{$2} $0
+snippet nint "definite integral" iA
+\\int_{$1}^{$2}$0
 endsnippet
 
 context "math()"
-snippet uint "upper integral" A
-\\uint{$1}{$2} $0
+snippet uint "upper integral" iA
+\\uint{$1}{$2}$0
 endsnippet
 
 context "math()"
-snippet lint "lower integral" A
-\\lint{$1}{$2} $0
+snippet lint "lower integral" iA
+\\lint{$1}{$2}$0
 endsnippet
 
 context "math()"
-snippet "(?<!\\|n|u|l)(int)" "indefinite integral" rA
+snippet iint "double integral" iA
+\\iint_{$1}$0
+endsnippet
+
+context "math()"
+snippet int "normal integral" wA
 \\int
 endsnippet
 

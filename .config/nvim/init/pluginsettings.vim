@@ -33,8 +33,12 @@ let g:vimtex_complete_enabled = 0
 let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_general_viewer = 'mupdf'
 
+let g:vimtex_imaps_enabled = 0
+
+
 " Airline
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+
 
 
 " FZF

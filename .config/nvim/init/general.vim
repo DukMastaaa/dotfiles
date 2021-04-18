@@ -24,7 +24,7 @@ colorscheme iceberg
 " GUI customisation for Neovide 
 let g:neovide_fullscreen=v:true
 set guifont=Consolas:h22
-let g:neovide_cursor_animation_length=0 
+let g:neovide_cursor_animation_length=0.13
 
 
 " tab = 4 spaces
@@ -39,3 +39,6 @@ set list
 
 " Show context lines above and below cursor
 :set scrolloff=5
+
+" Mouse support
+:set mouse=a
