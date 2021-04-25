@@ -15,7 +15,7 @@ Plug 'cocopon/iceberg.vim'
 
 " UltiSnips
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 
 " vimtex
 Plug 'lervag/vimtex'
