@@ -9,6 +9,9 @@
 \usepackage{siunitx}
 \usepackage{accents}
 \usepackage[nodayofweek,level]{datetime}
+\usepackage{xparse}
+
+% need to usepackage hyperref at the very end
 
 % Operators
 \newcommand{\deriv}{~\mathrm{d}}
@@ -23,19 +26,76 @@
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullspace}{NS}
 
-% Environments
+% Redefinition of theorem environments (and the like)
+% This makes it possible to link to a theorem, proposition or definition if the begin statement
+% has the optional name argument in [].
+
+% original layout:
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem*{theorem*}{Theorem}
+
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem*{theorem*}{Theorem}
+\newtheorem{inttheorem}{Theorem}[section]
+
+\ExplSyntaxOn
+\DeclareDocumentEnvironment{theorem} { o }
+{
+    \IfNoValueTF{#1}
+    {
+        \begin{inttheorem}
+    }
+    {
+        \begin{inttheorem}[#1]
+        \label{theorem:#1}
+    }
+}
+{
+    \end{inttheorem}
+}
+\ExplSyntaxOff
+
+\theoremstyle{plain}
+\newtheorem{intproposition}{Proposition}[section]
+
+\ExplSyntaxOn
+\DeclareDocumentEnvironment{proposition} { o }
+{
+    \IfNoValueTF{#1}
+    {
+        \begin{intproposition}
+    }
+    {
+        \begin{intproposition}[#1]
+        \label{proposition:#1}
+    }
+}
+{
+    \end{intproposition}
+}
+\ExplSyntaxOff
+
+\theoremstyle{definition}
+\newtheorem{intdefinition}{Definition}[section]
+
+\ExplSyntaxOn
+\DeclareDocumentEnvironment{definition} { o }
+{
+    \IfNoValueTF{#1}
+    {
+        \begin{intdefinition}
+    }
+    {
+        \begin{intdefinition}[#1]
+        \label{definition:#1}
+    }
+}
+{
+    \end{intdefinition}
+}
+\ExplSyntaxOff
 
 \theoremstyle{plain}
 \newtheorem{lemma}{Theorem}[section]
-
-\theoremstyle{plain}
-\newtheorem{proposition}{Proposition}[section]
-
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -58,7 +118,7 @@
 \newcommand{\uvec}[1]{\underaccent{\wtilde}{{#1}}}
 \newcommand{\grad}{\mathbf{\nabla}}
 \newcommand{\degree}{^{\circ}}
-	
+
 % Calculus stuff
 \newcommand{\derivfrac}[2]{\frac{\deriv #1}{\deriv #2}}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
