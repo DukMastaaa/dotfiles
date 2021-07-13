@@ -371,7 +371,22 @@ snippet lint "lower integral" iA
 endsnippet
 
 context "math()"
-snippet iint "double integral" iA
+snippet iiint "triple integral" iA
+\\iiint_{$1}$0
+endsnippet
+
+context "math()"
+snippet oiint "closed surface integral" iA
+\\oiint_{$1}$0
+endsnippet
+
+context "math()"
+snippet oint "closed line integral" iA
+\\oint_{$1}$0
+endsnippet
+
+context "math()"
+snippet "(?<![oi])iint" "double integral" rwA
 \\iint_{$1}$0
 endsnippet
 

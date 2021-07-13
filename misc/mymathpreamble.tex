@@ -1,22 +1,101 @@
+%%% PACKAGE IMPORTS
+
+%% packages required for this preamble
+\usepackage{xparse}
+
+%% math packages
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{float}
-\usepackage{cancel}
+\usepackage{esint}  % more integrals
+\usepackage{cancel}  % cancellations
+% \usepackage{accents}
+\usepackage{bm}  % for bold vectors
+
+%% graphics-related packages
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
-\usepackage{siunitx}
-\usepackage{accents}
+% \usepackage{tikz}
+\usepackage{float}
+\usepackage{svg}
+
+%% text-related packages
+\usepackage{ulem}  % for striked-out text
+\normalem  % ulem package changes emph to underline, revert change here
 \usepackage[nodayofweek,level]{datetime}
-\usepackage{xparse}
+\usepackage{parskip}
+\usepackage{siunitx}
+\sisetup{quotient-mode=fraction} % Output a/b as \frac{a}{b}
+\sisetup{output-complex-root=\ensuremath{\mathrm{j}}}  % change sqrt(-1) to display as j instead of i
 
 % need to usepackage hyperref at the very end
 
-% Operators
-\newcommand{\deriv}{~\mathrm{d}}
+
+%%% THEOREM-LIKE ENVIRONMENT DEFINITIONS
+% this makes it possible to link to a theorem, proposition or definition 
+% if the begin statement has the optional name argument in [].
+
+\theoremstyle{plain}
+\newtheorem{inttheorem}{Theorem}[section]
+\newtheorem{intproposition}{Proposition}[section]
+\newtheorem{intdefinition}{Definition}[section]
+
+\ExplSyntaxOn
+    \DeclareDocumentEnvironment{theorem} { o } {
+        \IfNoValueTF{#1} {
+            \begin{inttheorem}
+        } {
+            \begin{inttheorem}[#1]
+            \label{thm:#1}
+        }
+    } {
+        \end{inttheorem}
+    }
+
+    \DeclareDocumentEnvironment{proposition} { o } {
+        \IfNoValueTF{#1} {
+            \begin{intproposition}
+        } {
+            \begin{intproposition}[#1]
+            \label{prop:#1}
+        }
+    } {
+        \end{intproposition}
+    }
+
+    \DeclareDocumentEnvironment{definition} { o } {
+        \IfNoValueTF{#1} {
+            \begin{intdefinition}
+        } {
+            \begin{intdefinition}[#1]
+            \label{def:#1}
+        }
+    } {
+        \end{intdefinition}
+    }
+\ExplSyntaxOff
+
+%% other theorem-like environment definitions which don't require labelling
+\theoremstyle{plain}
+\newtheorem{lemma}{Theorem}[section]
+\newtheorem{corollary}{Theorem}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+
+%%% MATHEMATICAL SYMBOLS
+
+%% Operators
+% calculus
+\let\div\relax  % just get rid of the old division symbol
+\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\curl}{curl}
+% analysis
 \DeclareMathOperator{\usum}{U}
 \DeclareMathOperator{\lsum}{L}
+% linear algebra
 \DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\proj}{Proj}
@@ -25,101 +104,62 @@
 \DeclareMathOperator{\rowech}{ref}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\nullspace}{NS}
+% hyperbolic trig functions
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\artanh}{artanh}
 
-% Redefinition of theorem environments (and the like)
-% This makes it possible to link to a theorem, proposition or definition if the begin statement
-% has the optional name argument in [].
-
-% original layout:
-%\newtheorem{theorem}{Theorem}[section]
-%\newtheorem*{theorem*}{Theorem}
-
-\theoremstyle{plain}
-\newtheorem{inttheorem}{Theorem}[section]
-
-\ExplSyntaxOn
-\DeclareDocumentEnvironment{theorem} { o }
-{
-    \IfNoValueTF{#1}
-    {
-        \begin{inttheorem}
-    }
-    {
-        \begin{inttheorem}[#1]
-        \label{theorem:#1}
-    }
-}
-{
-    \end{inttheorem}
-}
-\ExplSyntaxOff
-
-\theoremstyle{plain}
-\newtheorem{intproposition}{Proposition}[section]
-
-\ExplSyntaxOn
-\DeclareDocumentEnvironment{proposition} { o }
-{
-    \IfNoValueTF{#1}
-    {
-        \begin{intproposition}
-    }
-    {
-        \begin{intproposition}[#1]
-        \label{proposition:#1}
-    }
-}
-{
-    \end{intproposition}
-}
-\ExplSyntaxOff
-
-\theoremstyle{definition}
-\newtheorem{intdefinition}{Definition}[section]
-
-\ExplSyntaxOn
-\DeclareDocumentEnvironment{definition} { o }
-{
-    \IfNoValueTF{#1}
-    {
-        \begin{intdefinition}
-    }
-    {
-        \begin{intdefinition}[#1]
-        \label{definition:#1}
-    }
-}
-{
-    \end{intdefinition}
-}
-\ExplSyntaxOff
-
-\theoremstyle{plain}
-\newtheorem{lemma}{Theorem}[section]
-
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-
-\theoremstyle{plain}
-\newtheorem{corollary}{Theorem}[section]
-
-% Left and right brackets
+%% brackets
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\inner}[2]{\left\langle #1 ,\, #2 \right\rangle}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\angleb}[1]{\left\langle #1 \right\rangle}
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
-% Other symbols
-\DeclareMathAccent{\wtilde}{\mathord}{largesymbols}{"65}
+%% vector calculus
+% tilde underset as vector notation - i don't use anymore
+% \DeclareMathAccent{\wtilde}{\mathord}{largesymbols}{"65}
+% \newcommand{\tildevec}[1]{\underaccent{\wtilde}{{#1}}}
 
-\newcommand{\utilde}[1]{\underset{\sim}{#1}}
-%\newcommand{\uvec}[1]{\utilde{#1}}
-\newcommand{\uvec}[1]{\underaccent{\wtilde}{{#1}}}
-\newcommand{\grad}{\mathbf{\nabla}}
-\newcommand{\degree}{^{\circ}}
+\let\oldvec=\vec  % old arrow accent symbol
+\renewcommand{\vec}[1]{\bm{\mathbf{#1}}}  % https://tex.stackexchange.com/a/3544
 
-% Calculus stuff
+% https://tex.stackexchange.com/a/188777
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+
+\NewDocumentCommand{\uvec}{mo} {
+    \ifcat\relax\noexpand#1%
+        \bm{\hat{#1}}
+    \else
+        \ifcsname uvec#1\endcsname
+            \csname uvec#1\endcsname
+        \else
+            \bm{\hat{\mathbf{#1}}}
+        \fi
+    \fi
+    \IfNoValueF{#2} {
+        _{\boldsymbol{\mathbf{#2}}}% please work?
+    }
+}
+
+% \DeclareRobustCommand{\uvec}[1]{{%
+%   \ifcat\relax\noexpand#1%
+%     % it should be a Greek letter
+%     \bm{\hat{#1}}%
+%   \else
+%     \ifcsname uvec#1\endcsname
+%       \csname uvec#1\endcsname
+%     \else
+%       \bm{\hat{\mathbf{#1}}}%
+%      \fi
+%    \fi
+% }}
+
+\newcommand{\grad}{\vec{\nabla}}
+
+%% basic calculus
+\newcommand{\deriv}{\,\mathrm{d}}
 \newcommand{\derivfrac}[2]{\frac{\deriv #1}{\deriv #2}}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 
@@ -127,12 +167,17 @@
 \newcommand{\lint}[2]{\displaystyle{\int^{#2}_{\underline{#1}}}}	
 \newcommand{\nint}[2]{\displaystyle{\int^{#2}_{#1}}}
 
-\newcommand{\infsum}[1]{\sum \limits^{\infty}_{#1}}
+% \newcommand{\infsum}[1]{\sum \limits^{\infty}_{#1}}  % deprecated
 
-% Stuff for other packages
-\sisetup{quotient-mode=fraction} % Output a/b as \frac{a}{b}
-\sisetup{output-complex-root=\ensuremath{\mathrm{j}}}  % change sqrt(-1) to display as j instead of i
+%% linear algebra
+\newcommand{\tpose}{\mathrm{T}}
 
-% Custom units
+%% other symbols
+\newcommand{\degree}{^{\circ}}
+
+
+%%% MISCELLANEOUS
+
+%% custom units
 \DeclareSIUnit \voltampere {VA}  % apparent power
 \DeclareSIUnit \vareactive {VAR}  % reactive power
