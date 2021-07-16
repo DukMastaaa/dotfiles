@@ -17,9 +17,34 @@ endif
 
 
 " colorscheme
-let g:airline_theme='iceberg'
-colorscheme iceberg
+" let g:airline_theme='dark_minimal'
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+lua << EOF
+require('lualine').setup{
+    options = {theme='ayu_dark'},
+}
+EOF
+let g:tokyonight_style = "night"
+let g:tokyonight_transparent = "true"
+colorscheme tokyonight
 
+set termguicolors
+lua << EOF
+require("bufferline").setup{
+    options = {
+        show_tab_indicators = false,
+    },
+    highlights = {
+        fill = {
+            guibg = {
+                attribute = "fg",
+                highlight = "bg-dark"
+            }
+        }
+    }
+}
+EOF
 
 " GUI customisation for Neovide 
 let g:neovide_fullscreen=v:true

@@ -4,19 +4,29 @@
 
 global !p
 
-# Using https://castel.dev/post/lecture-notes-1/#context
+# The below code uses .config/nvim/lua/mathmodecheck.lua to detect whether
+# the cursor is within a math environment or comment using nvim-treesitter.
+# If nvim-treesitter is not used, the code from 
+# https://castel.dev/post/lecture-notes-1/#context
+# using the vimtex plugin can be used instead.
 
 def math() -> bool:
-    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
-
+    return vim.eval("luaeval('mathmodecheck.in_mathzone()')")
 
 def comment() -> bool:
-    return vim.eval('vimtex#syntax#in_comment()') == '1'
+    return vim.eval("luaeval('mathmodecheck.in_comment()')")
+
+# def math() -> bool:
+#     return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
 
-def env(name: str) -> bool:
-    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
-    return x != '0' and x != '0'
+# def comment() -> bool:
+#     return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+
+# def env(name: str) -> bool:
+#     [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
+#     return x != '0' and x != '0'
 
 
 def matrix_tabstop_helper(rows: int, cols: int, line_spacing: int, tabstop_offset: int) -> str:
