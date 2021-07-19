@@ -18,6 +18,7 @@ local MATH_ENVIRONMENTS = {
   equation = true,
   math = true,
   array = true,
+  align = true,
 }
 local MATH_NODES = {
   displayed_equation = true,

@@ -11,10 +11,10 @@ global !p
 # using the vimtex plugin can be used instead.
 
 def math() -> bool:
-    return vim.eval("luaeval('mathmodecheck.in_mathzone()')")
+    return vim.eval("luaeval('mathmodecheck.in_mathzone()')") == "True"
 
 def comment() -> bool:
-    return vim.eval("luaeval('mathmodecheck.in_comment()')")
+    return vim.eval("luaeval('mathmodecheck.in_comment()')") == "True"
 
 # def math() -> bool:
 #     return vim.eval('vimtex#syntax#in_mathzone()') == '1'
@@ -526,13 +526,18 @@ snippet "(?<!\\|u)vec" "vector" rwA
 endsnippet
 
 context "math()"
-snippet "(?<!\\)uvec" "under tilde vector" rwA
+snippet "(?<!\\)uvec" "unit vector" rwA
 \\uvec{$1}$0
 endsnippet
 
 context "math()"
-snippet \hat "unit vector" w
+snippet \hat "hat" w
 \\hat{$1}$0
+endsnippet
+
+context "math()"
+snippet "(?<!\w)mat" "matrix" riA
+\\mat{$1}$0
 endsnippet
 
 context "math()"
