@@ -44,5 +44,7 @@ Plug 'p00f/nvim-ts-rainbow'
 
 Plug 'b3nj5m1n/kommentary'
 
+Plug 'windwp/nvim-autopairs'
+
 call plug#end()
 

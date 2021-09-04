@@ -12,6 +12,8 @@
 \usepackage{cancel}  % cancellations
 % \usepackage{accents}
 \usepackage{bm}  % for bold vectors
+% \usepackage{mathrsfs}
+\usepackage[scr]{rsfso}
 
 %% graphics-related packages
 \usepackage{graphicx}
@@ -123,6 +125,7 @@
 
 \let\oldvec=\vec  % old arrow accent symbol
 \renewcommand{\vec}[1]{\bm{\mathbf{#1}}}  % https://tex.stackexchange.com/a/3544
+\newcommand{\mat}[1]{\vec{#1}}  % for now
 
 % https://tex.stackexchange.com/a/188777
 \newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
@@ -166,6 +169,8 @@
 \newcommand{\uint}[2]{\displaystyle{\int^{\overline{#2}}_{#1}}}
 \newcommand{\lint}[2]{\displaystyle{\int^{#2}_{\underline{#1}}}}	
 \newcommand{\nint}[2]{\displaystyle{\int^{#2}_{#1}}}
+
+\newcommand{\laplace}{\mathscr{L}}
 
 % \newcommand{\infsum}[1]{\sum \limits^{\infty}_{#1}}  % deprecated
 

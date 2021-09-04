@@ -324,6 +324,11 @@ snippet "bb(.)" "\\mathbb{R}" rwA
 `!p snip.rv = "\\mathbb{" + match.group(1).upper() + "}"`
 endsnippet
 
+context "math()"
+snippet mscr "\\mathscr" wA
+\\mathscr{$1}$0
+endsnippet
+
 # == MISCELLANEOUS ==
 
 context "math()"
@@ -428,6 +433,11 @@ endsnippet
 context "math()"
 snippet "(?<!\\|\w)der" "derivative" rwA
 \\deriv
+endsnippet
+
+context "math()"
+snippet lapl "laplace" wA
+\\laplace
 endsnippet
 
 context "math()"

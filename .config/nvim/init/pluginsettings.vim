@@ -70,3 +70,27 @@ let g:UltiSnipsSnippetsDir = g:config_dir . "UltiSnips"
 let g:UltiSnipsSnippetDirectories = [g:UltiSnipsSnippetsDir]
 
 lua mathmodecheck = require('mathmodecheck')  -- see .config/nvim/lua/mathmodecheck.lua
+
+" nvim-autopairs
+lua <<EOF
+local npairs = require("nvim-autopairs")
+npairs.setup({
+    check_ts = true
+})
+
+require('nvim-treesitter.configs').setup {
+    autopairs = {enable = true}
+}
+
+local Rule = require('nvim-autopairs.rule')
+local cond = require('nvim-autopairs.conds')
+
+npairs.remove_rule('[')
+npairs.add_rules(
+    {
+        Rule("[", "]", {"tex", "latex"})
+        :with_pair(cond.not_before_text_check("\\"))
+        :with_pair(cond.not_before_text_check("\\["))
+    }
+)
+EOF
